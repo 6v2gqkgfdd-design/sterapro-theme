@@ -258,7 +258,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>Ons assortiment</h3>",
+                "text": "<h3>Bewezen werkers voor elke ruimte</h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1160,7 +1160,7 @@
         "text_rHPnrb": {
           "type": "text",
           "settings": {
-            "text": "<h1>Stera Pro</h1>",
+            "text": "<h2>Stera Pro</h2>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -1834,7 +1834,7 @@
         "text_h4xqWg": {
           "type": "text",
           "settings": {
-            "text": "<p>Groene kantoren. gezonde werkomgeving. minder stress. Groen cadeau. Duurzame ruimtes. Eerste indruk. Gezondere lucht.</p>",
+            "text": "<p>Groene kantoren. Gezonde werkomgeving. Minder stress. Groen cadeau. Duurzame ruimtes. Eerste indruk. Gezondere lucht.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",

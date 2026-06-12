@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stera Pro — Homepage verkenning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  .stera, .stera * { box-sizing: border-box; }
+  .stera h1, .stera h2, .stera p { margin: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="image-slot.js"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="stera-shared.jsx"></script>
+<script type="text/babel" src="stera-variant-a.jsx"></script>
+<script type="text/babel" src="stera-variant-b.jsx"></script>
+<script type="text/babel" src="stera-homepage-v2.jsx"></script>
+
+<script type="text/babel">
+/* ── Thema-fixes board (overdracht naar Claude Code) ───── */
+function FixRow({ nr, title, copy, code }) {
+  return (
+    <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '16px 0', borderBottom: `1px solid ${SC.line}` }}>
+      <span style={{ fontFamily: SC.serif, fontStyle: 'italic', fontSize: 20, color: SC.green, flexShrink: 0, width: 28 }}>{nr}</span>
+      <div>
+        <div style={{ fontFamily: SC.sans, fontWeight: 600, fontSize: 15.5, color: SC.deep }}>{title}</div>
+        <div style={{ fontFamily: SC.sans, fontSize: 13.5, lineHeight: 1.55, color: SC.mut, marginTop: 4, textWrap: 'pretty' }}>{copy}</div>
+        {code && <code style={{
+          display: 'inline-block', marginTop: 8, fontSize: 12, background: SC.sand, color: SC.deep,
+          padding: '4px 10px', borderRadius: 6, fontFamily: 'ui-monospace, monospace',
+        }}>{code}</code>}
+      </div>
+    </div>
+  );
+}
+
+function FixesBoard() {
+  return (
+    <div className="stera" style={{ width: 760, height: 740, background: SC.creme, padding: '40px 44px', overflow: 'hidden' }}>
+      <div style={{ fontFamily: SC.sans, fontWeight: 700, fontSize: 12.5, letterSpacing: '0.22em', textTransform: 'uppercase', color: SC.green }}>Voor Claude Code</div>
+      <h2 style={{ margin: '10px 0 6px', fontFamily: SC.serif, fontWeight: 400, fontSize: 30, color: SC.deep }}>Thema-fixes, los van het herontwerp</h2>
+      <p style={{ margin: 0, fontFamily: SC.sans, fontSize: 14, color: SC.mut }}>Snel door te voeren in <code style={{ fontSize: 12.5 }}>sterapro-theme</code> — onafhankelijk van welke variant je kiest.</p>
+      <div style={{ marginTop: 18 }}>
+        <FixRow nr="01" title="Basistekst 14 → 16 px"
+          copy="Premium uitstraling vraagt meer lucht; 14px oogt krap op desktop."
+          code='settings_data.json · "type_size_paragraph": "16"' />
+        <FixRow nr="02" title="Tinker-restkleuren in knoppen"
+          copy="Secundaire knoppen zijn nu grijs/zwart (#efefef / #1a1a1a) en scheme-2 gebruikt #c3cca6 met zwarte rand — vervang door crème/donkergroen."
+          code="color_schemes → secondary_button_* en scheme-2 primary_button_*" />
+        <FixRow nr="03" title="Onleesbare formulieren in scheme-2/3"
+          copy="Inputs staan op zwart-op-zwart (input_background én input_text_color #000000)."
+          code="scheme-2 · input_background / input_text_color" />
+        <FixRow nr="04" title="Dubbele h1 op de homepage"
+          copy="Zowel de hero als de 'Stera Pro'-sectie gebruiken een h1 — de tweede wordt h2 (SEO + hiërarchie)."
+          code="templates/index.json · hero_AEFVD8" />
+        <FixRow nr="05" title="Dubbel assortiment samenvoegen"
+          copy="'Ons assortiment' (product-list) en 'Ontdek ons assortiment' (collection-list) zeggen hetzelfde — hou er één over."
+          code="templates/index.json · product_list_EDUBdR / collection_list_kYf8p4" />
+        <FixRow nr="06" title="Marquee-copy gelijktrekken"
+          copy="Inconsistente hoofdletters ('Groene kantoren. gezonde werkomgeving.') — kies één stijl of schrap de marquee." />
+      </div>
+    </div>
+  );
+}
+
+/* ── Productkaart-focus ────────────────────────────────── */
+function ProductCardBoard() {
+  return (
+    <div className="stera" style={{ width: 420, height: 740, background: SC.sand, padding: '40px 44px', overflow: 'hidden' }}>
+      <div style={{ fontFamily: SC.sans, fontWeight: 700, fontSize: 12.5, letterSpacing: '0.22em', textTransform: 'uppercase', color: SC.green }}>Bouwsteen</div>
+      <h2 style={{ margin: '10px 0 0', fontFamily: SC.serif, fontWeight: 400, fontSize: 30, color: SC.deep }}>Productkaart</h2>
+      <p style={{ margin: '8px 0 0', fontFamily: SC.sans, fontSize: 14, lineHeight: 1.55, color: SC.mut, textWrap: 'pretty' }}>
+        Rustiger dan de huidige kaart: maat-info als stille metadata, en de login-drempel
+        als uitnodiging in plaats van obstakel.
+      </p>
+      <div style={{ width: 300, margin: '28px auto 0' }}>
+        <ProductCard slotId="board-prod" name="Ficus lyrata" meta="↕ 160 cm · Ø 24 cm" imgH={330} />
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <DesignCanvas>
+      <DCSection id="gekozen" title="Gekozen richting — Shop eerst, uitgewerkt"
+        subtitle="Met het originele logo en foto's als startpunt — sleep eigen beelden in elk kader om ze te vervangen. De XX-cijfers wachten op jullie echte getallen.">
+        <DCArtboard id="homepage-v2" label="Homepage · Shop eerst (v2)" width={1440} height={4372}>
+          <HomepageV2 />
+        </DCArtboard>
+      </DCSection>
+      <DCSection id="homepage" title="Archief — de twee oorspronkelijke richtingen"
+        subtitle="Zelfde huisstijl, andere volgorde en nadruk. Alle fotokaders zijn placeholders — sleep er je eigen foto's in, ze blijven bewaard.">
+        <DCArtboard id="variant-a" label="A · Verhaal eerst" width={1440} height={4752}>
+          <VariantA />
+        </DCArtboard>
+        <DCArtboard id="variant-b" label="B · Shop eerst" width={1440} height={4216}>
+          <VariantB />
+        </DCArtboard>
+      </DCSection>
+      <DCSection id="bouwstenen" title="Bouwstenen & thema-fixes"
+        subtitle="Detailwerk dat sowieso de moeite is, welke richting je ook kiest.">
+        <DCArtboard id="productcard" label="Productkaart" width={420} height={740}>
+          <ProductCardBoard />
+        </DCArtboard>
+        <DCArtboard id="fixes" label="Thema-fixes (voor Claude Code)" width={760} height={740}>
+          <FixesBoard />
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

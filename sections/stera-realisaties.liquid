@@ -24,7 +24,16 @@
         {% for block in section.blocks %}
           {% if block.type == 'stat' %}
             <div class="stera-real__stat" {{ block.shopify_attributes }}>
-              <div class="stera-real__value">{{ block.settings.value }}</div>
+              <div class="stera-real__value">
+                {%- case block.settings.source -%}
+                  {%- when 'locaties' -%}
+                    {{- shop.metafields.stera.locaties_onderhoud.value | default: block.settings.value -}}
+                  {%- when 'jaren' -%}
+                    {{- 'now' | date: '%Y' | minus: block.settings.start_year -}}
+                  {%- else -%}
+                    {{- block.settings.value -}}
+                {%- endcase -%}
+              </div>
               <div class="stera-real__label">{{ block.settings.label }}</div>
             </div>
           {% endif %}
@@ -97,7 +106,14 @@
       "type": "stat",
       "name": "Cijfer",
       "settings": [
-        { "type": "text", "id": "value", "label": "Waarde", "default": "XX" },
+        { "type": "select", "id": "source", "label": "Bron", "default": "handmatig",
+          "options": [
+            { "value": "handmatig", "label": "Handmatige waarde" },
+            { "value": "locaties", "label": "Locaties in onderhoud (gesynct uit SteraPro-app)" },
+            { "value": "jaren", "label": "Jaren sinds startjaar" }
+          ] },
+        { "type": "text", "id": "value", "label": "Waarde (handmatig / terugval)", "default": "XX" },
+        { "type": "number", "id": "start_year", "label": "Startjaar (voor bron 'jaren')", "default": 2021 },
         { "type": "text", "id": "label", "label": "Label", "default": "locaties in onderhoud" }
       ]
     }

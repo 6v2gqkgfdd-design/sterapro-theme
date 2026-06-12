@@ -145,35 +145,31 @@
         "s1": {
           "type": "stat",
           "settings": {
-            "value": "XX",
+            "source": "locaties",
+            "value": "5",
             "label": "locaties in onderhoud"
           }
         },
         "s2": {
           "type": "stat",
           "settings": {
-            "value": "XX",
+            "source": "jaren",
+            "start_year": 2021,
+            "value": "5",
             "label": "jaar groene ervaring"
-          }
-        },
-        "s3": {
-          "type": "stat",
-          "settings": {
-            "value": "XX m²",
-            "label": "mosmuur geplaatst"
           }
         }
       },
       "block_order": [
         "s1",
-        "s2",
-        "s3"
+        "s2"
       ]
     },
     "stera_portal": {
       "type": "stera-portal",
       "settings": {
-        "btn_link": "https://app.sterapro.be"
+        "btn_link": "https://app.sterapro.be",
+        "screenshot": "shopify://shop_images/sterapro-portal-screenshot.png"
       }
     },
     "stera_cta": {

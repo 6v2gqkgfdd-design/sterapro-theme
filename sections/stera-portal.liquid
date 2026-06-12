@@ -3,7 +3,8 @@
   Donkergroen: kop, feature-chips, knop; rechts browser-mockup met screenshot.
 {% endcomment %}
 
-<section class="stera-portal color-{{ section.settings.color_scheme }}" style="background: rgb(var(--color-background)); padding: 84px 0;">
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section class="stera-portal section color-{{ section.settings.color_scheme }}" style="padding: 84px 0;">
   <div class="stera-portal__inner">
     <div class="stera-portal__copy">
       {% if section.settings.kicker != blank %}<div class="stera-kicker stera-kicker--light">{{ section.settings.kicker }}</div>{% endif %}

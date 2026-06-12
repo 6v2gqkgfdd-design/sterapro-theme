@@ -3,7 +3,8 @@
   Links kop + pill-chips, rechts twee foto's waarvan de tweede verspringt.
 {% endcomment %}
 
-<section class="stera-wie color-{{ section.settings.color_scheme }}" style="background: rgb(var(--color-background)); padding: 76px 0;">
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section class="stera-wie section color-{{ section.settings.color_scheme }}" style="padding: 76px 0;">
   <div class="stera-wie__inner">
     <div class="stera-wie__copy">
       {% if section.settings.kicker != blank %}<div class="stera-kicker">{{ section.settings.kicker }}</div>{% endif %}

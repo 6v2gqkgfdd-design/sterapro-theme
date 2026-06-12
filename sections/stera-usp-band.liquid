@@ -3,7 +3,8 @@
   Donkergroene band met drie icoon + tekst items.
 {% endcomment %}
 
-<section class="stera-usp-band color-{{ section.settings.color_scheme }}" style="background: rgb(var(--color-background)); padding: 30px 0;">
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section class="stera-usp-band section color-{{ section.settings.color_scheme }}" style="padding: 30px 0;">
   <div class="stera-usp-band__inner">
     {% for block in section.blocks %}
       <div class="stera-usp-band__item" {{ block.shopify_attributes }}>

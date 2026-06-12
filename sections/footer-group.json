@@ -1,0 +1,174 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu_6wmaDw": {
+          "type": "menu",
+          "name": "t:names.menu",
+          "settings": {
+            "menu": "n-menu-top",
+            "heading": "Shop",
+            "menu_spacing": 5,
+            "show_as_accordion": true,
+            "accordion_icon": "plus",
+            "accordion_dividers": false,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "heading_preset": "h2",
+            "link_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "menu_8tJbUk": {
+          "type": "menu",
+          "settings": {
+            "menu": "n-footer",
+            "heading": "Info",
+            "menu_spacing": 5,
+            "show_as_accordion": true,
+            "accordion_icon": "plus",
+            "accordion_dividers": false,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "heading_preset": "h2",
+            "link_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "email_signup_JqUHkp": {
+          "type": "email-signup",
+          "name": "t:names.email_signup",
+          "settings": {
+            "width": "custom",
+            "custom_width": 20,
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-a95f3639-6149-4066-86e2-75e1fa8ad7a9",
+            "heading": "Nieuwsbrief",
+            "heading_preset": "h2",
+            "border_style": "all",
+            "border_width": 1,
+            "border_radius": 100,
+            "input_type_preset": "paragraph",
+            "style_class": "button",
+            "display_type": "text",
+            "label": "Aanmelden",
+            "integrated_button": true,
+            "button_type_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "payment_icons_pWWkmp": {
+          "type": "payment-icons",
+          "name": "t:names.payment_icons",
+          "settings": {
+            "horizontal_alignment": "center",
+            "gap": 5,
+            "padding-block-start": 15,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "menu_6wmaDw",
+        "menu_8tJbUk",
+        "email_signup_JqUHkp",
+        "payment_icons_pWWkmp"
+      ],
+      "name": "Footer",
+      "settings": {
+        "section_width": "page-width",
+        "gap": 10,
+        "color_scheme": "scheme-2",
+        "padding-block-start": 22,
+        "padding-block-end": 22
+      }
+    },
+    "utilities": {
+      "type": "footer-utilities",
+      "blocks": {
+        "social_links_Cqg8Mi": {
+          "type": "social-links",
+          "name": "t:names.social_media_links",
+          "settings": {
+            "facebook_url": "https://iets.be",
+            "instagram_url": "https://Iets.be",
+            "youtube_url": "",
+            "tiktok_url": "https://Iets.be",
+            "twitter_url": "",
+            "threads_url": "",
+            "linkedin_url": "",
+            "bluesky_url": "",
+            "snapchat_url": "",
+            "pinterest_url": "",
+            "tumblr_url": "",
+            "vimeo_url": "",
+            "custom_url": ""
+          },
+          "blocks": {}
+        },
+        "footer_policy_list_GKL4KW": {
+          "type": "footer-policy-list",
+          "name": "t:names.policy_list",
+          "settings": {
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "copyright": {
+          "type": "footer-copyright",
+          "settings": {
+            "show_powered_by": false,
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "social_links_Cqg8Mi",
+        "footer_policy_list_GKL4KW",
+        "copyright"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "gap": 24,
+        "divider_thickness": 1,
+        "color_scheme": "scheme-2",
+        "padding-block-start": 20,
+        "padding-block-end": 18
+      }
+    }
+  },
+  "order": [
+    "footer",
+    "utilities"
+  ]
+}

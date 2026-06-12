@@ -1,0 +1,108 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "disabled": true,
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "disabled": true,
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "custom_liquid_zRr3FH": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "{% comment %}\n  Mijn Stera Pro — portaal-instap op /pages/klant-account.\n\n  Plakken in: Online Store → Customize → (open de pagina \"Klant account\"\n  via de pagina-kiezer bovenaan) → sectie \"Custom Liquid\" toevoegen →\n  deze code erin → de oude registratie-sectie verwijderen of verbergen.\n\n  Werking:\n  - Ingelogde klant: haalt via de App Proxy (/apps/mijn) een kortlevend\n    token op en stuurt door naar het portaal op app.sterapro.be.\n  - Niet ingelogd: toont een nette inlogknop (wachtwoordloos, e-mailcode).\n  - Proxy kapot of klant onbekend: vriendelijke foutmelding, geen kale 404.\n\n  Veilig om nu al te plaatsen: zolang de Shopify App Proxy-bug bestaat,\n  valt de pagina automatisch terug op de foutmelding; zodra Shopify de\n  proxy fixt, werkt de doorstroming vanzelf.\n{% endcomment %}\n\n<div style=\"max-width: 560px; margin: 0 auto; padding: 80px 20px; text-align: center;\">\n{% if customer %}\n  <div id=\"sp-portal-state\">\n    <h2 style=\"margin-bottom: 12px;\">Mijn Stera Pro</h2>\n    <p id=\"sp-portal-msg\">Even geduld — we melden je aan bij je portaal…</p>\n  </div>\n  <script>\n    (function () {\n      var msg = document.getElementById('sp-portal-msg');\n      fetch('/apps/mijn', { headers: { 'Accept': 'application/json' } })\n        .then(function (r) {\n          if (!r.ok) throw new Error('status ' + r.status);\n          return r.json();\n        })\n        .then(function (d) {\n          if (d && d.loggedIn && d.token) {\n            msg.textContent = 'Gelukt! Je wordt doorgestuurd…';\n            window.location.replace(\n              'https://app.sterapro.be/sso?token=' + encodeURIComponent(d.token)\n            );\n          } else {\n            msg.innerHTML =\n              'Je bent ingelogd in de winkel, maar er hangt nog geen ' +\n              'portaalaccount aan dit e-mailadres. Mail ons even op ' +\n              '<a href=\"mailto:jelle@sterapro.be\">jelle@sterapro.be</a> ' +\n              'en we zetten het recht.';\n          }\n        })\n        .catch(function () {\n          msg.innerHTML =\n            'Het portaal is tijdelijk niet bereikbaar. Probeer het later ' +\n            'opnieuw of mail <a href=\"mailto:jelle@sterapro.be\">jelle@sterapro.be</a>.';\n        });\n    })();\n  </script>\n{% else %}\n  <h2 style=\"margin-bottom: 12px;\">Mijn Stera Pro</h2>\n  <p style=\"margin-bottom: 24px;\">\n    Bekijk je planten, onderhoudsbeurten en leveringen in je persoonlijke\n    portaal. Log eerst in met je zakelijke account — geen wachtwoord nodig,\n    je ontvangt een code per e-mail.\n  </p>\n  <a href=\"/account\" class=\"button\">Inloggen</a>\n  <p style=\"margin-top: 20px; font-size: 14px;\">\n    Nieuw bij Stera Pro?\n    <a href=\"https://app.sterapro.be/portal/registreren\">Registreer je bedrijf</a>\n    — gratis en zonder verplichtingen.\n  </p>\n{% endif %}\n</div>",
+        "color_scheme": "",
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "17810027602e191028": {
+      "type": "_blocks",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_zRr3FH",
+    "17810027602e191028"
+  ]
+}

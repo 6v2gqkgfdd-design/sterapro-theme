@@ -1,0 +1,99 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "header_section": {
+      "type": "header",
+      "blocks": {
+        "header-logo": {
+          "type": "_header-logo",
+          "static": true,
+          "settings": {
+            "hide_logo_on_home_page": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "header-menu": {
+          "type": "_header-menu",
+          "static": true,
+          "settings": {
+            "menu": "test",
+            "color_scheme": "scheme-1",
+            "type_font_primary_size": "0.875rem",
+            "menu_font_style": "regular",
+            "type_font_primary_link": "body",
+            "type_case_primary_link": "uppercase",
+            "menu_style": "text",
+            "featured_products_aspect_ratio": "4 / 5",
+            "featured_collections_aspect_ratio": "16 / 9",
+            "image_border_radius": 15,
+            "navigation_bar": true,
+            "color_scheme_navigation_bar": "",
+            "drawer_accordion": false,
+            "drawer_accordion_expand_first": false,
+            "drawer_dividers": false
+          },
+          "blocks": {}
+        }
+      },
+      "settings": {
+        "logo_position": "left",
+        "menu_position": "right",
+        "menu_row": "top",
+        "show_search": true,
+        "search_position": "right",
+        "search_row": "top",
+        "show_country": false,
+        "country_selector_style": true,
+        "show_language": false,
+        "localization_font": "body",
+        "localization_font_size": "1.125rem",
+        "localization_position": "right",
+        "localization_row": "top",
+        "section_width": "full-width",
+        "section_height": "standard",
+        "enable_sticky_header": "always",
+        "divider_width": 0,
+        "divider_size": "page-width",
+        "border_width": 0,
+        "color_scheme_top": "scheme-1",
+        "color_scheme_bottom": "",
+        "color_scheme_transparent": "scheme-2",
+        "enable_transparent_header_home": false,
+        "home_color_scheme": "inverse",
+        "enable_transparent_header_product": false,
+        "product_color_scheme": "default",
+        "enable_transparent_header_collection": false,
+        "collection_color_scheme": "default"
+      }
+    },
+    "custom_liquid_nx6zea": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "{% comment %}\n  \"Mijn Stera Pro\"-knop in de header, rechts van het winkelmandje.\n  Desktop: omlijnde (rustige) knop met blaadje-icoon + tekst.\n  Mobiel (< 750px): alleen het blaadje-icoon.\n\n  Plakken in: Online Store → Customize → in de linkerlijst onder \"Header\"\n  → Add section → Custom Liquid → deze code erin → Opslaan.\n  (De sectie zelf toont niets; het script hangt de knop in de header.\n   Omdat de Header-groep op élke pagina staat, werkt dit site-breed.)\n\n  Haal daarna ook de tekstlink \"Account\" uit het menu:\n  Online Store → Navigatie → open het menu met \"Account\" → item verwijderen.\n{% endcomment %}\n\n<style>\n  .sp-portal-btn {\n    display: inline-flex;\n    align-items: center;\n    gap: 7px;\n    background: transparent;\n    color: #2F5840;\n    border: 1.5px solid #2F5840;\n    border-radius: 999px;\n    padding: 7px 15px;\n    margin-left: 10px;\n    font-size: 0.85rem;\n    font-weight: 600;\n    letter-spacing: 0.02em;\n    text-decoration: none;\n    white-space: nowrap;\n    transition: background 0.15s ease, color 0.15s ease;\n  }\n  .sp-portal-btn:hover { background: #2F5840; color: #FFFDF7; }\n  .sp-portal-btn svg {\n    width: 17px;\n    height: 17px;\n    stroke: currentColor;\n    fill: none;\n    stroke-width: 1.8;\n    stroke-linecap: round;\n    stroke-linejoin: round;\n    flex: none;\n  }\n  @media (max-width: 749px) {\n    .sp-portal-btn {\n      background: transparent;\n      border: none;\n      color: inherit;\n      padding: 4px;\n      margin-left: 4px;\n    }\n    .sp-portal-btn:hover { background: transparent; opacity: 0.7; }\n    .sp-portal-btn .sp-portal-label { display: none; }\n    .sp-portal-btn svg { width: 21px; height: 21px; }\n  }\n</style>\n<script>\n  (function () {\n    function init() {\n      var header = document.querySelector('header') || document.body;\n      if (header.querySelector('.sp-portal-btn')) return;\n      var carts = header.querySelectorAll('a[href*=\"/cart\"]');\n      var cart = carts.length ? carts[carts.length - 1] : null;\n      if (!cart) return;\n      var a = document.createElement('a');\n      a.href = '/pages/klant-account';\n      a.className = 'sp-portal-btn';\n      a.setAttribute('aria-label', 'Mijn Stera Pro');\n      a.innerHTML =\n        '<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\">' +\n        '<path d=\"M5 21c.5 -4.5 2.5 -8 7 -10\"/>' +\n        '<path d=\"M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9 0 1 0 3 2 5h3z\"/>' +\n        '</svg>' +\n        '<span class=\"sp-portal-label\">Mijn Stera Pro</span>';\n      cart.insertAdjacentElement('afterend', a);\n    }\n    if (document.readyState === 'loading') {\n      document.addEventListener('DOMContentLoaded', init);\n    } else {\n      init();\n    }\n    document.addEventListener('shopify:section:load', init);\n  })();\n</script>",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "header_section",
+    "custom_liquid_nx6zea"
+  ]
+}

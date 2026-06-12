@@ -1,0 +1,88 @@
+{% comment %}
+  Stera Pro — USP-band (design-handoff §5).
+  Donkergroene band met drie icoon + tekst items.
+{% endcomment %}
+
+<section class="stera-usp-band color-{{ section.settings.color_scheme }}" style="background: rgb(var(--color-background)); padding: 30px 0;">
+  <div class="stera-usp-band__inner">
+    {% for block in section.blocks %}
+      <div class="stera-usp-band__item" {{ block.shopify_attributes }}>
+        <span class="stera-usp-band__icon">
+          {% case block.settings.icon %}
+            {% when 'ruler' %}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 17 3l4 4L7 21l-4-4Z"/><path d="m8 12 1.5 1.5M11 9l1.5 1.5M14 6l1.5 1.5"/></svg>
+            {% when 'truck' %}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h12v8H1zM13 11h4l3 3v2h-7z"/><circle cx="6" cy="18" r="1.6"/><circle cx="16.5" cy="18" r="1.6"/></svg>
+            {% when 'drop' %}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.3 6 10.2A6.1 6.1 0 0 1 12 19a6.1 6.1 0 0 1-6-5.8C6 9.3 12 3 12 3Z"/></svg>
+          {% endcase %}
+        </span>
+        <span>{{ block.settings.text }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .stera-usp-band__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stera-usp-band__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-body--family);
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(var(--color-foreground));
+  }
+  .stera-usp-band__icon { display: inline-flex; flex: none; }
+  @media (max-width: 749px) {
+    .stera-usp-band__inner { flex-direction: column; gap: 14px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Stera USP-band",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Kleurenschema",
+      "default": "scheme-2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "USP",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icoon", "default": "truck",
+          "options": [
+            { "value": "ruler", "label": "Meetlat (advies)" },
+            { "value": "truck", "label": "Vrachtwagen (levering)" },
+            { "value": "drop", "label": "Druppel (onderhoud)" }
+          ] },
+        { "type": "text", "id": "text", "label": "Tekst", "default": "Geleverd én geïnstalleerd door eigen team" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Stera USP-band",
+      "blocks": [
+        { "type": "usp", "settings": { "icon": "ruler", "text": "Advies met licht- & vochtmeting — verrekend bij bestelling" } },
+        { "type": "usp", "settings": { "icon": "truck", "text": "Geleverd én geïnstalleerd door eigen team" } },
+        { "type": "usp", "settings": { "icon": "drop", "text": "Onderhoudscontracten met digitale werkbon" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

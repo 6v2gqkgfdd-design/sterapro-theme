@@ -1,0 +1,102 @@
+{% comment %}
+  Stera Pro — Voor wie / Oplossingen per ruimte (design-handoff §7).
+  Links kop + pill-chips, rechts twee foto's waarvan de tweede verspringt.
+{% endcomment %}
+
+<section class="stera-wie color-{{ section.settings.color_scheme }}" style="background: rgb(var(--color-background)); padding: 76px 0;">
+  <div class="stera-wie__inner">
+    <div class="stera-wie__copy">
+      {% if section.settings.kicker != blank %}<div class="stera-kicker">{{ section.settings.kicker }}</div>{% endif %}
+      <h2 class="stera-h2">{{ section.settings.title }}</h2>
+      {% if section.settings.sub != blank %}<p class="stera-sub">{{ section.settings.sub }}</p>{% endif %}
+      <div class="stera-wie__chips">
+        {% for block in section.blocks %}
+          <a class="stera-wie__chip" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+            {{ block.settings.label }}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="stera-wie__media">
+      {% if section.settings.image_1 != blank %}
+        {{ section.settings.image_1 | image_url: width: 900 | image_tag: class: 'stera-wie__img', loading: 'lazy' }}
+      {% else %}<div class="stera-wie__img stera-wie__img--placeholder"></div>{% endif %}
+      {% if section.settings.image_2 != blank %}
+        {{ section.settings.image_2 | image_url: width: 900 | image_tag: class: 'stera-wie__img stera-wie__img--offset', loading: 'lazy' }}
+      {% else %}<div class="stera-wie__img stera-wie__img--offset stera-wie__img--placeholder"></div>{% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .stera-wie__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+  }
+  .stera-wie__copy { flex: 0 0 40%; }
+  .stera-wie__chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; max-width: 460px; }
+  .stera-wie__chip {
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: 14.5px;
+    color: #2F5840;
+    border: 1.5px solid rgba(47,88,64,.16);
+    border-radius: 999px;
+    padding: 12px 22px;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    transition: border-color .15s ease;
+  }
+  .stera-wie__chip:hover { border-color: #2F5840; }
+  .stera-wie__media { flex: 1; display: flex; gap: 20px; min-width: 0; }
+  .stera-wie__img { flex: 1; height: 300px; width: 100%; object-fit: cover; border-radius: 14px; display: block; }
+  .stera-wie__img--offset { margin-top: 36px; }
+  .stera-wie__img--placeholder { background: rgba(47,88,64,.12); }
+  @media (max-width: 989px) {
+    .stera-wie__inner { flex-direction: column; gap: 32px; }
+    .stera-wie__copy { flex: none; }
+    .stera-wie__img { height: 200px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Stera voor wie",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Kleurenschema", "default": "scheme-a95f3639-6149-4066-86e2-75e1fa8ad7a9" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Voor wie" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "Oplossingen per ruimte" },
+    { "type": "textarea", "id": "sub", "label": "Subtekst", "default": "Liever inspiratie dan een catalogus? Start vanuit jouw type ruimte en ontdek wat er werkt." },
+    { "type": "image_picker", "id": "image_1", "label": "Foto 1" },
+    { "type": "image_picker", "id": "image_2", "label": "Foto 2 (verspringt)" }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Chip",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Tekst", "default": "Kantoren & co-workings" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Stera voor wie",
+      "blocks": [
+        { "type": "chip", "settings": { "label": "Kantoren & co-workings" } },
+        { "type": "chip", "settings": { "label": "Winkels & showrooms" } },
+        { "type": "chip", "settings": { "label": "Praktijken & wachtkamers" } },
+        { "type": "chip", "settings": { "label": "Relatiegeschenken & teams" } }
+      ] }
+  ]
+}
+{% endschema %}

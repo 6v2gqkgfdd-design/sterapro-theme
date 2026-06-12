@@ -1,0 +1,91 @@
+{% comment %}
+  Stera Pro — Advies-CTA (design-handoff §10).
+  Donkergroene kaart (radius 22) op crème met twee knoppen en verrekenregel.
+{% endcomment %}
+
+<section class="stera-cta color-{{ section.settings.color_scheme }}" style="background: rgb(var(--color-background)); padding: 56px 0;">
+  <div class="stera-cta__inner">
+    <div class="stera-cta__card">
+      <div class="stera-cta__copy">
+        {% if section.settings.kicker != blank %}<div class="stera-kicker stera-kicker--light">{{ section.settings.kicker }}</div>{% endif %}
+        <h2 class="stera-cta__title">{{ section.settings.title }}</h2>
+        {% if section.settings.sub != blank %}<p class="stera-cta__sub">{{ section.settings.sub }}</p>{% endif %}
+        <div class="stera-cta__check">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg>
+          {{ section.settings.checkline }}
+        </div>
+      </div>
+      <div class="stera-cta__actions">
+        {% if section.settings.btn_primary_label != blank %}
+          <a class="stera-btn stera-btn--light" href="{{ section.settings.btn_primary_link | default: '/pages/contact' }}">{{ section.settings.btn_primary_label }}</a>
+        {% endif %}
+        {% if section.settings.btn_ghost_label != blank %}
+          <a class="stera-btn stera-cta__ghost" href="{{ section.settings.btn_ghost_link | default: 'mailto:jelle@sterapro.be' }}">{{ section.settings.btn_ghost_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .stera-cta__inner { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+  .stera-cta__card {
+    background: #2F5840;
+    border-radius: 22px;
+    padding: 56px 64px;
+    display: flex;
+    gap: 64px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .stera-cta__title {
+    margin: 12px 0 0;
+    font-family: var(--font-accent--family);
+    font-weight: 400;
+    font-size: clamp(28px, 2.8vw, 38px);
+    line-height: 1.15;
+    color: #FFFDF7;
+  }
+  .stera-cta__sub {
+    margin: 14px 0 0;
+    font-family: var(--font-body--family);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 560px;
+    color: rgba(255,253,247,.72);
+  }
+  .stera-cta__check {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body--family);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #C3CCA6;
+  }
+  .stera-cta__actions { display: flex; flex-direction: column; gap: 14px; flex: none; }
+  .stera-cta__ghost { background: transparent; color: #FFFDF7; border: 1.5px solid rgba(255,253,247,.4); }
+  .stera-cta__ghost:hover { border-color: #FFFDF7; }
+  @media (max-width: 989px) {
+    .stera-cta__card { flex-direction: column; align-items: flex-start; padding: 36px 28px; gap: 28px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Stera advies-CTA",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Kleurenschema (achtergrond pagina)", "default": "scheme-1" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Advies op locatie" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "Twijfel je wat past bij jouw ruimte?" },
+    { "type": "textarea", "id": "sub", "label": "Subtekst", "default": "We komen langs met licht- en vochtmeting, maken een grondplan met lichtinval en werken een voorstel op maat uit met foto's en vaste prijzen." },
+    { "type": "text", "id": "checkline", "label": "Verrekenregel", "default": "Het adviesbezoek wordt volledig verrekend bij je eerste bestelling." },
+    { "type": "text", "id": "btn_primary_label", "label": "Primaire knop", "default": "Plan een adviesbezoek" },
+    { "type": "url", "id": "btn_primary_link", "label": "Primaire link" },
+    { "type": "text", "id": "btn_ghost_label", "label": "Ghost-knop", "default": "Liever eerst even mailen?" },
+    { "type": "url", "id": "btn_ghost_link", "label": "Ghost-link" }
+  ],
+  "presets": [{ "name": "Stera advies-CTA" }]
+}
+{% endschema %}

@@ -1,0 +1,121 @@
+{% comment %}
+  Stera Pro — Mijn Stera Pro portaalsectie (design-handoff §9).
+  Donkergroen: kop, feature-chips, knop; rechts browser-mockup met screenshot.
+{% endcomment %}
+
+<section class="stera-portal color-{{ section.settings.color_scheme }}" style="background: rgb(var(--color-background)); padding: 84px 0;">
+  <div class="stera-portal__inner">
+    <div class="stera-portal__copy">
+      {% if section.settings.kicker != blank %}<div class="stera-kicker stera-kicker--light">{{ section.settings.kicker }}</div>{% endif %}
+      <h2 class="stera-h2" style="color: rgb(var(--color-foreground));">{{ section.settings.title }}</h2>
+      {% if section.settings.sub != blank %}<p class="stera-sub">{{ section.settings.sub }}</p>{% endif %}
+      <div class="stera-portal__features">
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h3v3h-3zM20 17v3h-3"/></svg>
+          {{ section.settings.feature_1 }}
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+          {{ section.settings.feature_2 }}
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg>
+          {{ section.settings.feature_3 }}
+        </span>
+      </div>
+      {% if section.settings.btn_label != blank %}
+        <div style="margin-top: 32px;">
+          <a class="stera-btn stera-btn--light" href="{{ section.settings.btn_link | default: 'https://app.sterapro.be' }}">
+            {{ section.settings.btn_label }}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="stera-portal__mock">
+      <div class="stera-portal__frame">
+        <div class="stera-portal__browser">
+          <div class="stera-portal__bar">
+            <span></span><span></span><span></span>
+            <em>app.sterapro.be</em>
+          </div>
+          {% if section.settings.screenshot != blank %}
+            {{ section.settings.screenshot | image_url: width: 1200 | image_tag: class: 'stera-portal__shot', loading: 'lazy' }}
+          {% else %}
+            <div class="stera-portal__shot stera-portal__shot--placeholder"></div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .stera-portal__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+  }
+  .stera-portal__copy { flex: 0 0 40%; }
+  .stera-kicker--light { color: #C3CCA6; }
+  .stera-portal .stera-sub { color: rgba(255,253,247,.72); }
+  .stera-portal__features {
+    display: flex;
+    gap: 28px;
+    margin-top: 32px;
+    font-family: var(--font-body--family);
+    font-size: 14px;
+    color: rgba(255,253,247,.72);
+    flex-wrap: wrap;
+  }
+  .stera-portal__features span { display: flex; align-items: center; gap: 8px; }
+  .stera-btn--light { background: #FFFDF7; color: #2F5840; border: 1.5px solid #FFFDF7; padding: 12px 22px; font-size: 14px; }
+  .stera-btn--light:hover { opacity: .9; }
+  .stera-portal__mock { flex: 1; min-width: 0; }
+  .stera-portal__frame { background: rgba(255,253,247,.08); border-radius: 18px; padding: 16px; }
+  .stera-portal__browser { background: #fff; border-radius: 12px; overflow: hidden; }
+  .stera-portal__bar {
+    height: 34px;
+    background: #F4F1E8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 14px;
+  }
+  .stera-portal__bar span { width: 9px; height: 9px; border-radius: 50%; background: #D8D2C0; }
+  .stera-portal__bar em {
+    margin-left: 12px;
+    font-style: normal;
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    color: rgba(35,50,43,.62);
+  }
+  .stera-portal__shot { width: 100%; height: 270px; object-fit: cover; object-position: top; display: block; }
+  .stera-portal__shot--placeholder { background: #FFFDF7; }
+  @media (max-width: 989px) {
+    .stera-portal__inner { flex-direction: column; gap: 32px; }
+    .stera-portal__copy { flex: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Stera portaal",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Kleurenschema", "default": "scheme-2" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Voor klanten" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "Alles in Mijn Stera Pro" },
+    { "type": "textarea", "id": "sub", "label": "Subtekst", "default": "Eenmaal klant volg je planten, onderhoudsbezoeken, werkbonnen en offertes op één plek — app.sterapro.be." },
+    { "type": "text", "id": "feature_1", "label": "Feature 1", "default": "Plantpaspoort" },
+    { "type": "text", "id": "feature_2", "label": "Feature 2", "default": "Werkbonnen" },
+    { "type": "text", "id": "feature_3", "label": "Feature 3", "default": "Offertes tekenen" },
+    { "type": "text", "id": "btn_label", "label": "Knoptekst", "default": "Naar Mijn Stera Pro" },
+    { "type": "url", "id": "btn_link", "label": "Knoplink" },
+    { "type": "image_picker", "id": "screenshot", "label": "App-screenshot" }
+  ],
+  "presets": [{ "name": "Stera portaal" }]
+}
+{% endschema %}

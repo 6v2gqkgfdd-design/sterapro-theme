@@ -1,0 +1,105 @@
+{% comment %}
+  Stera Pro — Bestsellers (design-handoff §6).
+  4 productkaarten uit een collectie: foto, naam, maat-meta,
+  "Log in voor jouw prijzen" met slot-icoon (prijzen achter B2B-login).
+{% endcomment %}
+
+<section class="stera-best color-{{ section.settings.color_scheme }}" style="background: rgb(var(--color-background)); padding: 76px 0;">
+  <div class="stera-best__inner">
+    <div class="stera-best__head">
+      <div>
+        {% if section.settings.kicker != blank %}<div class="stera-kicker">{{ section.settings.kicker }}</div>{% endif %}
+        <h2 class="stera-h2">{{ section.settings.title }}</h2>
+        {% if section.settings.sub != blank %}<p class="stera-sub">{{ section.settings.sub }}</p>{% endif %}
+      </div>
+      {% if section.settings.btn_label != blank %}
+        <a class="stera-btn stera-btn--ghost stera-btn--small" href="{{ section.settings.collection.url | default: '/collections/all' }}">
+          {{ section.settings.btn_label }}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      {% endif %}
+    </div>
+    <div class="stera-best__grid">
+      {% assign shown = 0 %}
+      {% for product in section.settings.collection.products limit: 8 %}
+        {% if shown >= 4 %}{% break %}{% endif %}
+        {% if product.featured_image == blank %}{% continue %}{% endif %}
+        {% assign shown = shown | plus: 1 %}
+        <a class="stera-best__card" href="{{ product.url }}">
+          {{ product.featured_image | image_url: width: 700 | image_tag: class: 'stera-best__img', loading: 'lazy' }}
+          <div class="stera-best__body">
+            <div class="stera-best__name">{{ product.title }}</div>
+            {% assign v = product.first_available_variant | default: product.variants.first %}
+            {% if v and v.option1 != blank and v.option1 != 'Default Title' %}
+              <div class="stera-best__meta">↕ {{ v.option1 }}</div>
+            {% endif %}
+            <div class="stera-best__login">
+              {% if customer %}
+                {{ product.price | money }}
+              {% else %}
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                Log in voor jouw prijzen
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .stera-best__inner { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+  .stera-best__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+  .stera-sub {
+    margin: 10px 0 0;
+    font-family: var(--font-body--family);
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 520px;
+    color: rgba(var(--color-foreground), 0.62);
+  }
+  .stera-best__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 44px; }
+  .stera-best__card {
+    background: #fff;
+    border: 1px solid rgba(47,88,64,.16);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: rgb(var(--color-foreground));
+    transition: border-color .15s ease;
+  }
+  .stera-best__card:hover { border-color: rgba(47,88,64,.45); }
+  .stera-best__img { width: 100%; height: 290px; object-fit: cover; display: block; background: #F3E1C6; }
+  .stera-best__body { padding: 16px 18px 18px; }
+  .stera-best__name { font-family: var(--font-body--family); font-weight: 600; font-size: 15px; line-height: 1.3; }
+  .stera-best__meta { margin-top: 4px; font-family: var(--font-body--family); font-size: 12.5px; color: rgba(35,50,43,.62); }
+  .stera-best__login {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-body--family);
+    font-size: 13px;
+    font-weight: 600;
+    color: #426F52;
+  }
+  @media (max-width: 989px) {
+    .stera-best__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Stera bestsellers",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Kleurenschema", "default": "scheme-1" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Meest gekozen" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "Bewezen werkers voor elke ruimte" },
+    { "type": "textarea", "id": "sub", "label": "Subtekst", "default": "Soorten die het goed doen op kantoor: sterk, luchtzuiverend en mooi om naar te kijken." },
+    { "type": "text", "id": "btn_label", "label": "Knoptekst", "default": "Naar het assortiment" },
+    { "type": "collection", "id": "collection", "label": "Collectie (eerste 4 met foto)" }
+  ],
+  "presets": [{ "name": "Stera bestsellers" }]
+}
+{% endschema %}

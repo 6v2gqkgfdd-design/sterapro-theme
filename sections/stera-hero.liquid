@@ -1,0 +1,140 @@
+{% comment %}
+  Stera Pro — Hero "Shop eerst" (design-handoff §3).
+  Zandkleurige hero: kicker, serif-italic h1, intro, 2 knoppen,
+  micro-regel met slot-icoon, foto rechts (radius 18px).
+{% endcomment %}
+
+<section class="stera-hero color-{{ section.settings.color_scheme }}" style="background: rgb(var(--color-background));">
+  <div class="stera-hero__inner">
+    <div class="stera-hero__copy">
+      {% if section.settings.kicker != blank %}
+        <div class="stera-kicker">{{ section.settings.kicker }}</div>
+      {% endif %}
+      <h1 class="stera-hero__title">{{ section.settings.title }}</h1>
+      {% if section.settings.intro != blank %}
+        <p class="stera-hero__intro">{{ section.settings.intro }}</p>
+      {% endif %}
+      <div class="stera-hero__buttons">
+        {% if section.settings.btn_primary_label != blank %}
+          <a class="stera-btn stera-btn--primary" href="{{ section.settings.btn_primary_link }}">
+            {{ section.settings.btn_primary_label }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.btn_ghost_label != blank %}
+          <a class="stera-btn stera-btn--ghost" href="{{ section.settings.btn_ghost_link }}">{{ section.settings.btn_ghost_label }}</a>
+        {% endif %}
+      </div>
+      {% if section.settings.microcopy != blank %}
+        <div class="stera-hero__micro">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          {{ section.settings.microcopy }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="stera-hero__media">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'eager', class: 'stera-hero__img', widths: '800, 1200, 1600' }}
+      {% else %}
+        <div class="stera-hero__img stera-hero__img--placeholder"></div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .stera-hero__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    display: flex;
+    align-items: center;
+    gap: 64px;
+  }
+  .stera-hero__copy { flex: 0 0 46%; }
+  .stera-kicker {
+    font-family: var(--font-body--family);
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #426F52;
+  }
+  .stera-hero__title {
+    margin: 16px 0 0;
+    font-family: var(--font-accent--family);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(38px, 4vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: rgb(var(--color-foreground));
+  }
+  .stera-hero__intro {
+    margin: 18px 0 0;
+    font-family: var(--font-body--family);
+    font-size: 16.5px;
+    line-height: 1.6;
+    max-width: 480px;
+    color: rgba(var(--color-foreground), 0.62);
+  }
+  .stera-hero__buttons { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
+  .stera-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 999px;
+    padding: 14px 26px;
+    text-decoration: none;
+    transition: opacity .15s ease, background .15s ease;
+  }
+  .stera-btn--primary { background: #2F5840; color: #FFFDF7; border: 1.5px solid #2F5840; }
+  .stera-btn--primary:hover { opacity: .9; }
+  .stera-btn--ghost { background: transparent; color: #2F5840; border: 1.5px solid rgba(47,88,64,.4); }
+  .stera-btn--ghost:hover { border-color: #2F5840; }
+  .stera-hero__micro {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    font-family: var(--font-body--family);
+    font-size: 13.5px;
+    color: rgba(var(--color-foreground), 0.62);
+  }
+  .stera-hero__media { flex: 1; min-width: 0; }
+  .stera-hero__img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 18px;
+    display: block;
+  }
+  .stera-hero__img--placeholder { background: rgba(47,88,64,.12); }
+  @media (max-width: 989px) {
+    .stera-hero__inner { flex-direction: column; gap: 32px; padding: 44px 20px; }
+    .stera-hero__copy { flex: none; }
+    .stera-hero__img { height: 300px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Stera hero",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Kleurenschema", "default": "scheme-a95f3639-6149-4066-86e2-75e1fa8ad7a9" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "B2B · Bestel met jouw prijzen" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "Groene ruimtes die ademen" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Sierbeplanting, mosmuren en onderhoud voor kantoren, winkels en praktijken. Bestel rechtstreeks, of laat je begeleiden met advies op locatie." },
+    { "type": "text", "id": "btn_primary_label", "label": "Primaire knop", "default": "Shop het assortiment" },
+    { "type": "url", "id": "btn_primary_link", "label": "Primaire link" },
+    { "type": "text", "id": "btn_ghost_label", "label": "Ghost-knop", "default": "Vraag jouw B2B-prijzen aan" },
+    { "type": "url", "id": "btn_ghost_link", "label": "Ghost-link" },
+    { "type": "text", "id": "microcopy", "label": "Microcopy", "default": "Al klant? Log in en zie meteen jouw prijzen." },
+    { "type": "image_picker", "id": "image", "label": "Foto rechts" }
+  ],
+  "presets": [{ "name": "Stera hero" }]
+}
+{% endschema %}
